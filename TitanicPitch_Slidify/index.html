@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Titanic Pitch</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Titanic Pitch">
+  <meta name="author" content="Stanley Lam">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Titanic Pitch</h1>
+    <h2>Exploring Survivorship Rates in Titanic</h2>
+    <p>Stanley Lam<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>A Titanic Problem</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Interactive Tool for Exploring Survivorship Rates for the Titanic</h3>
+
+<h3>Stanley Lam</h3>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Background and Basic Options</h2>
+  </hgroup>
+  <article data-timings="">
+    <h4>The Titanic was a British passenger liner that sank in 1912 after hitting an iceburg. Based on actual survivor data from the Titanic, this tool allows you to calculate your chances of surviving, based on the following three demographic options:</h4>
+
+<ul>
+<li>Gender -- Male/Female</li>
+<li>Age -- Adult/Child</li>
+<li>Ticket Type -- 1st Class/2nd Class/3rd Class/Crew</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Original Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <h4>The survivorship dataset is contained within the R package appropriately titled &quot;datasets&quot;. However, the dataset is originally in a 4-dimensional array, which must first be converted to a data frame. The code below shows this conversion (which is done automatically in the app).</h4>
+
+<pre><code class="r">library(datasets)
+library(plyr)
+titanic &lt;- adply(Titanic, c(1,2,3))
+head(titanic)
+</code></pre>
+
+<pre><code>##   Class    Sex   Age No Yes
+## 1   1st   Male Child  0   5
+## 2   2nd   Male Child  0  11
+## 3   3rd   Male Child 35  13
+## 4  Crew   Male Child  0   0
+## 5   1st Female Child  0   1
+## 6   2nd Female Child  0  13
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Sample Calculation of Survival Rate</h2>
+  </hgroup>
+  <article data-timings="">
+    <h4>The code below shows how the survival rate is calculated. For each passenger type, the number of survivors is divided by the total number of passengers (i.e. the sum of survivors and casualties).</h4>
+
+<h4>The program automatically updates each time the user provides new information.</h4>
+
+<pre><code class="r">yes &lt;- titanic$Yes[titanic$Class == &quot;3rd&quot; &amp; titanic$Sex == &quot;Male&quot; &amp; titanic$Age == &quot;Child&quot;]
+no &lt;- titanic$No[titanic$Class == &quot;3rd&quot; &amp; titanic$Sex == &quot;Male&quot; &amp; titanic$Age == &quot;Child&quot;]
+prob &lt;- yes / (yes + no)
+paste(round(100*prob, 2), &quot;%&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;27.08 %&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Uses</h2>
+  </hgroup>
+  <article data-timings="">
+    <h4>This app is beneficial for anyone interested in the Titanic -- from fans looking to deepen their knowledge on the subject to researchers in need of a quick reference. The interface is intuitive and easy-to-use. And best of all, it&#39;s free!</h4>
+
+<h4>Alternatively, more information about the original dataset can be found here: <a href="http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/Titanic.html">http://stat.ethz.ch/R-manual/R-devel/library/datasets/html/Titanic.html</a></h4>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='A Titanic Problem'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Background and Basic Options'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Original Data'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Sample Calculation of Survival Rate'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Uses'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
